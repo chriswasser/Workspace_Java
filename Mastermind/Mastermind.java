@@ -8,6 +8,34 @@ public class Mastermind {
 	private static final String[] allowedColours = new String[] { "WHITE", "YELLOW", "ORANGE", "RED", "GREEN", "BLUE",
 			"BEIGE", "BLACK" };
 
+	// the random evaluation configurations
+	private static final int[][] eval = new int[][] {
+		{0,1,2,3}, // one
+		{0,1,3,2},
+		{0,2,1,3},
+		{0,2,3,1},
+		{0,3,1,2}, // five
+		{0,3,2,1},
+		{1,0,2,3},
+		{1,0,3,2},
+		{1,2,0,3},
+		{1,2,3,0}, // ten
+		{1,3,0,2},
+		{1,3,2,0},
+		{2,0,1,3},
+		{2,0,3,1},
+		{2,1,0,3}, // fifteen
+		{2,1,3,0},
+		{2,3,0,1},
+		{2,3,1,0},
+		{3,0,1,2},
+		{3,0,2,1}, // twenty
+		{3,1,0,2},
+		{3,1,2,0},
+		{3,2,0,1},
+		{3,2,1,0}, // twenty-four
+	};
+	
 	// removes spaces and sets the String to all capital letters in the given
 	// StringArray
 	private static String[] cleanArray(String[] s) {
@@ -77,13 +105,16 @@ public class Mastermind {
 			System.out.printf("Congratulations!!! Your guess was correct u win after %d guesses\n", (i + 1));
 			return true;
 		}
-
+		
+		// takes a random configuration to evaluate how good the guess was
+		int config = (int) (Math.random()*24);
+		
 		// returns a black pin for every correct colour and correct position
 		// returns a white pin for every correct colour on the wrong position
-		for (int m = guessedColours.length - 1; m >= 0; --m) {
+		for (int m = 0; m < guessedColours.length; ++m) {
 			for (int n = 0; n < colours.length; ++n) {
-				if (guessedColours[m].equals(colours[n])) {
-					if (m == n) {
+				if (guessedColours[Mastermind.eval[config][m]].equals(colours[n])) {
+					if (Mastermind.eval[config][m] == n) {
 						System.out.printf("black pin ");
 					} else {
 						System.out.printf("white pin ");
