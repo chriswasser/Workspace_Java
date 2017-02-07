@@ -133,7 +133,7 @@ public class MastermindGUI extends JFrame {
 	private JButton setSoluBtn;
 	private JButton GuessBtn;
 	private JLabel lblAllowedColours;
-	private JLabel CongratsLabel;
+	private JLabel EndOfGameLbl;
 	private JButton playAgainBtn;
 	private JButton playCompBtn;
 
@@ -162,6 +162,7 @@ public class MastermindGUI extends JFrame {
 				try {
 					MastermindGUI frame = new MastermindGUI();
 					frame.setVisible(true);
+					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -173,11 +174,6 @@ public class MastermindGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MastermindGUI() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		setTitle("Mastermind");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 50, 500, 800);
@@ -185,13 +181,6 @@ public class MastermindGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		CongratsLabel = new JLabel("");
-		CongratsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		CongratsLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		CongratsLabel.setBounds(10, 200, 464, 125);
-		contentPane.add(CongratsLabel);
-		CongratsLabel.setVisible(false);
 
 		row1_1 = new JPanel();
 		row1_1.setBounds(80, 75, 40, 40);
@@ -337,178 +326,6 @@ public class MastermindGUI extends JFrame {
 		row9_4.setBounds(290, 515, 40, 40);
 		contentPane.add(row9_4);
 
-		Input1 = new JButton("");
-		Input1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (isset1) {
-					reset(Input1);
-					current[0] = null;
-					isset1 = false;
-				}
-			}
-		});
-		Input1.setBounds(80, 570, 40, 40);
-		contentPane.add(Input1);
-
-		Input2 = new JButton("");
-		Input2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (isset2) {
-					reset(Input2);
-					current[1] = null;
-					isset2 = false;
-				}
-			}
-		});
-		Input2.setBounds(150, 570, 40, 40);
-		contentPane.add(Input2);
-
-		Input3 = new JButton("");
-		Input3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (isset3) {
-					reset(Input3);
-					current[2] = null;
-					isset3 = false;
-				}
-			}
-		});
-		Input3.setBounds(220, 570, 40, 40);
-		contentPane.add(Input3);
-
-		Input4 = new JButton("");
-		Input4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (isset4) {
-					reset(Input4);
-					current[3] = null;
-					isset4 = false;
-				}
-			}
-		});
-		Input4.setBounds(290, 570, 40, 40);
-		contentPane.add(Input4);
-
-		Colour1 = new JButton("");
-		Colour1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.WHITE);
-			}
-		});
-		Colour1.setBounds(25, 650, 40, 40);
-		contentPane.add(Colour1);
-		Colour1.setBackground(Color.WHITE);
-
-		Colour2 = new JButton("");
-		Colour2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.YELLOW);
-			}
-		});
-		Colour2.setBounds(75, 650, 40, 40);
-		contentPane.add(Colour2);
-		Colour2.setBackground(Color.YELLOW);
-
-		Colour3 = new JButton("");
-		Colour3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.ORANGE);
-			}
-		});
-		Colour3.setBounds(130, 650, 40, 40);
-		contentPane.add(Colour3);
-		Colour3.setBackground(new Color(255, 200, 0));
-
-		Colour4 = new JButton("");
-		Colour4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.RED);
-			}
-		});
-		Colour4.setBounds(185, 650, 40, 40);
-		contentPane.add(Colour4);
-		Colour4.setBackground(Color.RED);
-
-		Colour5 = new JButton("");
-		Colour5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.GREEN);
-			}
-		});
-		Colour5.setBounds(25, 700, 40, 40);
-		contentPane.add(Colour5);
-		Colour5.setBackground(Color.GREEN);
-
-		Colour6 = new JButton("");
-		Colour6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.BLUE);
-			}
-		});
-		Colour6.setBounds(75, 700, 40, 40);
-		contentPane.add(Colour6);
-		Colour6.setBackground(Color.BLUE);
-
-		Colour7 = new JButton("");
-		Colour7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(new Color(128, 0, 0));
-			}
-		});
-		Colour7.setBounds(130, 700, 40, 40);
-		contentPane.add(Colour7);
-		Colour7.setBackground(new Color(128, 0, 0));
-
-		Colour8 = new JButton("");
-		Colour8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setColour(Color.BLACK);
-			}
-		});
-		Colour8.setBounds(185, 700, 40, 40);
-		contentPane.add(Colour8);
-		Colour8.setBackground(Color.BLACK);
-
-		setSoluBtn = new JButton("Set Solution");
-		setSoluBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				start();
-			}
-		});
-		setSoluBtn.setBounds(270, 650, 180, 40);
-		contentPane.add(setSoluBtn);
-
-		GuessBtn = new JButton("Enter Guess");
-		GuessBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				guess();
-			}
-		});
-		GuessBtn.setBounds(270, 700, 180, 40);
-		contentPane.add(GuessBtn);
-		GuessBtn.setVisible(false);
-
-		lblAllowedColours = new JLabel("Allowed Colours:");
-		lblAllowedColours.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAllowedColours.setBounds(25, 615, 140, 30);
-		contentPane.add(lblAllowedColours);
-
-		Solution1 = new JButton("");
-		Solution1.setBounds(80, 20, 40, 40);
-		contentPane.add(Solution1);
-
-		Solution2 = new JButton("");
-		Solution2.setBounds(150, 20, 40, 40);
-		contentPane.add(Solution2);
-
-		Solution3 = new JButton("");
-		Solution3.setBounds(220, 20, 40, 40);
-		contentPane.add(Solution3);
-
-		Solution4 = new JButton("");
-		Solution4.setBounds(290, 20, 40, 40);
-		contentPane.add(Solution4);
-
 		panels[0][0] = row1_1;
 		panels[0][1] = row1_2;
 		panels[0][2] = row1_3;
@@ -545,6 +362,154 @@ public class MastermindGUI extends JFrame {
 		panels[8][1] = row9_2;
 		panels[8][2] = row9_3;
 		panels[8][3] = row9_4;
+
+		Input1 = new JButton("");
+		Input1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (isset1) {
+					Input1.setBackground(null);
+					current[0] = null;
+					isset1 = false;
+				}
+			}
+		});
+		Input1.setBounds(80, 570, 40, 40);
+		contentPane.add(Input1);
+
+		Input2 = new JButton("");
+		Input2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (isset2) {
+					Input2.setBackground(null);
+					current[1] = null;
+					isset2 = false;
+				}
+			}
+		});
+		Input2.setBounds(150, 570, 40, 40);
+		contentPane.add(Input2);
+
+		Input3 = new JButton("");
+		Input3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (isset3) {
+					Input3.setBackground(null);
+					current[2] = null;
+					isset3 = false;
+				}
+			}
+		});
+		Input3.setBounds(220, 570, 40, 40);
+		contentPane.add(Input3);
+
+		Input4 = new JButton("");
+		Input4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (isset4) {
+					Input4.setBackground(null);
+					current[3] = null;
+					isset4 = false;
+				}
+			}
+		});
+		Input4.setBounds(290, 570, 40, 40);
+		contentPane.add(Input4);
+
+		Solution1 = new JButton("");
+		Solution1.setBounds(80, 20, 40, 40);
+		contentPane.add(Solution1);
+
+		Solution2 = new JButton("");
+		Solution2.setBounds(150, 20, 40, 40);
+		contentPane.add(Solution2);
+
+		Solution3 = new JButton("");
+		Solution3.setBounds(220, 20, 40, 40);
+		contentPane.add(Solution3);
+
+		Solution4 = new JButton("");
+		Solution4.setBounds(290, 20, 40, 40);
+		contentPane.add(Solution4);
+
+		Colour1 = new JButton("");
+		Colour1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[0]);
+			}
+		});
+		Colour1.setBounds(25, 650, 40, 40);
+		contentPane.add(Colour1);
+		Colour1.setBackground(colours[0]);
+
+		Colour2 = new JButton("");
+		Colour2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[1]);
+			}
+		});
+		Colour2.setBounds(75, 650, 40, 40);
+		contentPane.add(Colour2);
+		Colour2.setBackground(colours[1]);
+
+		Colour3 = new JButton("");
+		Colour3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[2]);
+			}
+		});
+		Colour3.setBounds(130, 650, 40, 40);
+		contentPane.add(Colour3);
+		Colour3.setBackground(new Color(255, 200, 0));
+
+		Colour4 = new JButton("");
+		Colour4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[3]);
+			}
+		});
+		Colour4.setBounds(185, 650, 40, 40);
+		contentPane.add(Colour4);
+		Colour4.setBackground(colours[3]);
+
+		Colour5 = new JButton("");
+		Colour5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[4]);
+			}
+		});
+		Colour5.setBounds(25, 700, 40, 40);
+		contentPane.add(Colour5);
+		Colour5.setBackground(colours[4]);
+
+		Colour6 = new JButton("");
+		Colour6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[5]);
+			}
+		});
+		Colour6.setBounds(75, 700, 40, 40);
+		contentPane.add(Colour6);
+		Colour6.setBackground(colours[5]);
+
+		Colour7 = new JButton("");
+		Colour7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[6]);
+			}
+		});
+		Colour7.setBounds(130, 700, 40, 40);
+		contentPane.add(Colour7);
+		Colour7.setBackground(colours[6]);
+
+		Colour8 = new JButton("");
+		Colour8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setColour(colours[7]);
+			}
+		});
+		Colour8.setBounds(185, 700, 40, 40);
+		contentPane.add(Colour8);
+		Colour8.setBackground(colours[7]);
 
 		pin1_1 = new JPanel();
 		pin1_1.setBounds(380, 75, 10, 40);
@@ -727,38 +692,41 @@ public class MastermindGUI extends JFrame {
 		pins[8][2] = pin9_3;
 		pins[8][3] = pin9_4;
 
+		setSoluBtn = new JButton("Set Solution");
+		setSoluBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				start();
+			}
+		});
+		setSoluBtn.setBounds(270, 650, 180, 40);
+		contentPane.add(setSoluBtn);
+
+		GuessBtn = new JButton("Enter Guess");
+		GuessBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				guess();
+			}
+		});
+		GuessBtn.setBounds(270, 700, 180, 40);
+		contentPane.add(GuessBtn);
+		GuessBtn.setVisible(false);
+
+		lblAllowedColours = new JLabel("Allowed Colours:");
+		lblAllowedColours.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAllowedColours.setBounds(25, 615, 140, 30);
+		contentPane.add(lblAllowedColours);
+
+		EndOfGameLbl = new JLabel("");
+		EndOfGameLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		EndOfGameLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		EndOfGameLbl.setBounds(10, 200, 464, 125);
+		contentPane.add(EndOfGameLbl);
+		EndOfGameLbl.setVisible(false);
+
 		playAgainBtn = new JButton("Play again");
 		playAgainBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				resetAll();
-				for (int i = 0; i < 9; ++i) {
-					for (int j = 0; j < 4; ++j) {
-						pins[i][j].setBackground(null);
-						panels[i][j].setBackground(null);
-					}
-				}
-				CongratsLabel.setText("");
-				CongratsLabel.setVisible(false);
-				for (int i = 0; i < 4; ++i) {
-					solution[i] = null;
-				}
-				reset(Solution1);
-				reset(Solution2);
-				reset(Solution3);
-				reset(Solution4);
-				playAgainBtn.setVisible(false);
-				setSoluBtn.setVisible(true);
-				GuessBtn.setVisible(false);
-				playCompBtn.setVisible(true);
-				numGuesses = 1;
-				row4_1.setVisible(true);
-				row4_2.setVisible(true);
-				row4_3.setVisible(true);
-				row4_4.setVisible(true);
-				pin4_1.setVisible(true);
-				pin4_2.setVisible(true);
-				pin4_3.setVisible(true);
-				pin4_4.setVisible(true);
+				setStart();
 			}
 		});
 		playAgainBtn.setBounds(270, 650, 180, 40);
@@ -833,6 +801,50 @@ public class MastermindGUI extends JFrame {
 		issetpin4 = false;
 	}
 
+	private void setStart() {
+		Input1.setBackground(null);
+		Input2.setBackground(null);
+		Input3.setBackground(null);
+		Input4.setBackground(null);
+		isset1 = false;
+		isset2 = false;
+		isset3 = false;
+		isset4 = false;
+		Solution1.setBackground(null);
+		Solution2.setBackground(null);
+		Solution3.setBackground(null);
+		Solution4.setBackground(null);
+		for (int i = 0; i < 9; ++i) {
+			for (int j = 0; j < 4; ++j) {
+				pins[i][j].setBackground(null);
+				panels[i][j].setBackground(null);
+			}
+		}
+		issetpin1 = false;
+		issetpin2 = false;
+		issetpin3 = false;
+		issetpin4 = false;
+		EndOfGameLbl.setText("");
+		EndOfGameLbl.setVisible(false);
+		for (int i = 0; i < 4; ++i) {
+			current[i] = null;
+			solution[i] = null;
+		}
+		playAgainBtn.setVisible(false);
+		GuessBtn.setVisible(false);
+		setSoluBtn.setVisible(true);
+		playCompBtn.setVisible(true);
+		numGuesses = 1;
+		row4_1.setVisible(true);
+		row4_2.setVisible(true);
+		row4_3.setVisible(true);
+		row4_4.setVisible(true);
+		pin4_1.setVisible(true);
+		pin4_2.setVisible(true);
+		pin4_3.setVisible(true);
+		pin4_4.setVisible(true);
+	}
+
 	private void displayCurrent() {
 		for (int i = 0; i < 4; ++i) {
 			panels[numGuesses - 1][i].setBackground(current[i]);
@@ -848,7 +860,7 @@ public class MastermindGUI extends JFrame {
 				Solution4.setBackground(current[3]);
 				end();
 				String s = String.format("Congratulations you win after %d guesses!", numGuesses);
-				CongratsLabel.setText(s);
+				EndOfGameLbl.setText(s);
 				playAgainBtn.setVisible(true);
 			} else {
 				displayCurrent();
@@ -856,7 +868,7 @@ public class MastermindGUI extends JFrame {
 				numGuesses++;
 				if (numGuesses == 10) {
 					end();
-					CongratsLabel.setText("You lost, please try again!");
+					EndOfGameLbl.setText("You lost, please try again!");
 				}
 			}
 		}
@@ -871,7 +883,7 @@ public class MastermindGUI extends JFrame {
 		pin4_2.setVisible(false);
 		pin4_3.setVisible(false);
 		pin4_4.setVisible(false);
-		CongratsLabel.setVisible(true);
+		EndOfGameLbl.setVisible(true);
 	}
 
 	private void start() {
@@ -898,9 +910,9 @@ public class MastermindGUI extends JFrame {
 			for (int n = 0; n < solution.length; ++n) {
 				if (current[eval[config][m]] == solution[n]) {
 					if (eval[config][m] == n) {
-						placePin(Color.BLACK);
+						placePin(colours[7]);
 					} else {
-						placePin(Color.WHITE);
+						placePin(colours[0]);
 					}
 				}
 			}
