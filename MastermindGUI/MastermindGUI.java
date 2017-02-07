@@ -62,10 +62,10 @@ public class MastermindGUI extends JFrame {
 	private JButton Input2;
 	private JButton Input3;
 	private JButton Input4;
-	private boolean isset1 = false;
-	private boolean isset2 = false;
-	private boolean isset3 = false;
-	private boolean isset4 = false;
+	private boolean isSetInput1 = false;
+	private boolean isSetInput2 = false;
+	private boolean isSetInput3 = false;
+	private boolean isSetInput4 = false;
 	private JButton[] current = new JButton[4];
 
 	// solution decided by user or chance
@@ -123,10 +123,10 @@ public class MastermindGUI extends JFrame {
 	private JPanel pin9_2;
 	private JPanel pin9_3;
 	private JPanel pin9_4;
-	private boolean issetpin1 = false;
-	private boolean issetpin2 = false;
-	private boolean issetpin3 = false;
-	private boolean issetpin4 = false;
+	private boolean isSetPin1 = false;
+	private boolean isSetPin2 = false;
+	private boolean isSetPin3 = false;
+	private boolean isSetPin4 = false;
 	private JPanel[][] pins = new JPanel[9][4];
 
 	// miscellaneous
@@ -344,9 +344,9 @@ public class MastermindGUI extends JFrame {
 		Input1 = new JButton("");
 		Input1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (isset1) {
+				if (isSetInput1) {
 					current[0].setBackground(null);
-					isset1 = false;
+					isSetInput1 = false;
 				}
 			}
 		});
@@ -356,9 +356,9 @@ public class MastermindGUI extends JFrame {
 		Input2 = new JButton("");
 		Input2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (isset2) {
+				if (isSetInput2) {
 					current[1].setBackground(null);
-					isset2 = false;
+					isSetInput2 = false;
 				}
 			}
 		});
@@ -368,9 +368,9 @@ public class MastermindGUI extends JFrame {
 		Input3 = new JButton("");
 		Input3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (isset3) {
+				if (isSetInput3) {
 					current[2].setBackground(null);
-					isset3 = false;
+					isSetInput3 = false;
 				}
 			}
 		});
@@ -380,9 +380,9 @@ public class MastermindGUI extends JFrame {
 		Input4 = new JButton("");
 		Input4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (isset4) {
+				if (isSetInput4) {
 					current[3].setBackground(null);
-					isset4 = false;
+					isSetInput4 = false;
 				}
 			}
 		});
@@ -677,7 +677,7 @@ public class MastermindGUI extends JFrame {
 		playAgainBtn = new JButton("Play again");
 		playAgainBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setStart();
+				restart();
 			}
 		});
 		playAgainBtn.setBounds(270, 650, 180, 40);
@@ -701,37 +701,37 @@ public class MastermindGUI extends JFrame {
 				return;
 			}
 		}
-		if (!isset1) {
+		if (!isSetInput1) {
 			current[0].setBackground(c);
-			isset1 = true;
-		} else if (!isset2) {
+			isSetInput1 = true;
+		} else if (!isSetInput2) {
 			current[1].setBackground(c);
-			isset2 = true;
-		} else if (!isset3) {
+			isSetInput2 = true;
+		} else if (!isSetInput3) {
 			current[2].setBackground(c);
-			isset3 = true;
-		} else if (!isset4) {
+			isSetInput3 = true;
+		} else if (!isSetInput4) {
 			current[3].setBackground(c);
-			isset4 = true;
+			isSetInput4 = true;
 		}
 	}
 
 	private void resetAll() {
-		isset1 = false;
-		isset2 = false;
-		isset3 = false;
-		isset4 = false;
+		isSetInput1 = false;
+		isSetInput2 = false;
+		isSetInput3 = false;
+		isSetInput4 = false;
 		current[0].setBackground(null);
 		current[1].setBackground(null);
 		current[2].setBackground(null);
 		current[3].setBackground(null);
-		issetpin1 = false;
-		issetpin2 = false;
-		issetpin3 = false;
-		issetpin4 = false;
+		isSetPin1 = false;
+		isSetPin2 = false;
+		isSetPin3 = false;
+		isSetPin4 = false;
 	}
 
-	private void setStart() {
+	private void restart() {
 		resetAll();
 		Solution1.setBackground(null);
 		Solution2.setBackground(null);
@@ -764,10 +764,7 @@ public class MastermindGUI extends JFrame {
 				Solution2.setBackground(current[1].getBackground());
 				Solution3.setBackground(current[2].getBackground());
 				Solution4.setBackground(current[3].getBackground());
-				end();
-				String s = String.format("Congratulations you win after %d guesses!", numGuesses);
-				EndOfGameLbl.setText(s);
-				playAgainBtn.setVisible(true);
+				end(String.format("Congratulations you win after %d guesses!", numGuesses));
 			} else {
 				for (int i = 0; i < 4; ++i) {
 					panels[numGuesses - 1][i].setBackground(current[i].getBackground());
@@ -775,14 +772,13 @@ public class MastermindGUI extends JFrame {
 				resetAll();
 				numGuesses++;
 				if (numGuesses == 10) {
-					end();
-					EndOfGameLbl.setText("You lost, please try again!");
+					end("You lost, please try again!");
 				}
 			}
 		}
 	}
 
-	private void end() {
+	private void end(String s) {
 		row4_1.setVisible(false);
 		row4_2.setVisible(false);
 		row4_3.setVisible(false);
@@ -791,7 +787,10 @@ public class MastermindGUI extends JFrame {
 		pin4_2.setVisible(false);
 		pin4_3.setVisible(false);
 		pin4_4.setVisible(false);
+		GuessBtn.setVisible(false);
 		EndOfGameLbl.setVisible(true);
+		playAgainBtn.setVisible(true);
+		EndOfGameLbl.setText(s);
 	}
 
 	private void start() {
@@ -839,18 +838,18 @@ public class MastermindGUI extends JFrame {
 	}
 
 	private void placePin(Color c) {
-		if (!issetpin1) {
+		if (!isSetPin1) {
 			pins[numGuesses - 1][0].setBackground(c);
-			issetpin1 = true;
-		} else if (!issetpin2) {
+			isSetPin1 = true;
+		} else if (!isSetPin2) {
 			pins[numGuesses - 1][1].setBackground(c);
-			issetpin2 = true;
-		} else if (!issetpin3) {
+			isSetPin2 = true;
+		} else if (!isSetPin3) {
 			pins[numGuesses - 1][2].setBackground(c);
-			issetpin3 = true;
-		} else if (!issetpin4) {
+			isSetPin3 = true;
+		} else if (!isSetPin4) {
 			pins[numGuesses - 1][3].setBackground(c);
-			issetpin4 = true;
+			isSetPin4 = true;
 		}
 	}
 
