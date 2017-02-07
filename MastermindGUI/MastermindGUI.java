@@ -66,7 +66,7 @@ public class MastermindGUI extends JFrame {
 	private boolean isset2 = false;
 	private boolean isset3 = false;
 	private boolean isset4 = false;
-	private Color[] current = new Color[4];
+	private JButton[] current = new JButton[4];
 
 	// solution decided by user or chance
 	private JButton Solution1;
@@ -138,17 +138,20 @@ public class MastermindGUI extends JFrame {
 	private JButton playCompBtn;
 
 	// the random evaluation configurations
-	public final int[][] eval = new int[][] { { 0, 1, 2, 3 }, // one
-			{ 0, 1, 3, 2 }, { 0, 2, 1, 3 }, { 0, 2, 3, 1 }, { 0, 3, 1, 2 }, // five
-			{ 0, 3, 2, 1 }, { 1, 0, 2, 3 }, { 1, 0, 3, 2 }, { 1, 2, 0, 3 }, { 1, 2, 3, 0 }, // ten
-			{ 1, 3, 0, 2 }, { 1, 3, 2, 0 }, { 2, 0, 1, 3 }, { 2, 0, 3, 1 }, { 2, 1, 0, 3 }, // fifteen
-			{ 2, 1, 3, 0 }, { 2, 3, 0, 1 }, { 2, 3, 1, 0 }, { 3, 0, 1, 2 }, { 3, 0, 2, 1 }, // twenty
-			{ 3, 1, 0, 2 }, { 3, 1, 2, 0 }, { 3, 2, 0, 1 }, { 3, 2, 1, 0 }, // twenty-four
+	public final int[][] eval = new int[][] { // null
+			{ 0, 1, 2, 3 }, { 0, 1, 3, 2 }, { 0, 2, 1, 3 }, { 0, 2, 3, 1 }, // four
+			{ 0, 3, 1, 2 }, { 0, 3, 2, 1 }, { 1, 0, 2, 3 }, { 1, 0, 3, 2 }, // eight
+			{ 1, 2, 0, 3 }, { 1, 2, 3, 0 }, { 1, 3, 0, 2 }, { 1, 3, 2, 0 }, // twelve
+			{ 2, 0, 1, 3 }, { 2, 0, 3, 1 }, { 2, 1, 0, 3 }, { 2, 1, 3, 0 }, // sixteen
+			{ 2, 3, 0, 1 }, { 2, 3, 1, 0 }, { 3, 0, 1, 2 }, { 3, 0, 2, 1 }, // twenty
+			{ 3, 1, 0, 2 }, { 3, 1, 2, 0 }, { 3, 2, 0, 1 }, { 3, 2, 1, 0 } // twenty-four
 	};
 
 	// configure the used colours
-	private final Color[] colours = new Color[] { Color.WHITE, Color.YELLOW, Color.ORANGE, Color.RED, Color.GREEN,
-			Color.BLUE, new Color(128, 0, 0), Color.BLACK };
+	private final Color[] colours = new Color[] { // begin
+			Color.WHITE, Color.YELLOW, Color.ORANGE, Color.RED, // four
+			Color.GREEN, Color.BLUE, new Color(128, 0, 0), Color.BLACK // eight
+	};
 
 	// number of user guesses
 	int numGuesses = 1;
@@ -326,49 +329,23 @@ public class MastermindGUI extends JFrame {
 		row9_4.setBounds(290, 515, 40, 40);
 		contentPane.add(row9_4);
 
-		panels[0][0] = row1_1;
-		panels[0][1] = row1_2;
-		panels[0][2] = row1_3;
-		panels[0][3] = row1_4;
-		panels[1][0] = row2_1;
-		panels[1][1] = row2_2;
-		panels[1][2] = row2_3;
-		panels[1][3] = row2_4;
-		panels[2][0] = row3_1;
-		panels[2][1] = row3_2;
-		panels[2][2] = row3_3;
-		panels[2][3] = row3_4;
-		panels[3][0] = row4_1;
-		panels[3][1] = row4_2;
-		panels[3][2] = row4_3;
-		panels[3][3] = row4_4;
-		panels[4][0] = row5_1;
-		panels[4][1] = row5_2;
-		panels[4][2] = row5_3;
-		panels[4][3] = row5_4;
-		panels[5][0] = row6_1;
-		panels[5][1] = row6_2;
-		panels[5][2] = row6_3;
-		panels[5][3] = row6_4;
-		panels[6][0] = row7_1;
-		panels[6][1] = row7_2;
-		panels[6][2] = row7_3;
-		panels[6][3] = row7_4;
-		panels[7][0] = row8_1;
-		panels[7][1] = row8_2;
-		panels[7][2] = row8_3;
-		panels[7][3] = row8_4;
-		panels[8][0] = row9_1;
-		panels[8][1] = row9_2;
-		panels[8][2] = row9_3;
-		panels[8][3] = row9_4;
+		panels = new JPanel[][] { // begin
+				{ row1_1, row1_2, row1_3, row1_4 }, // first line
+				{ row2_1, row2_2, row2_3, row2_4 }, // second line
+				{ row3_1, row3_2, row3_3, row3_4 }, // third line
+				{ row4_1, row4_2, row4_3, row4_4 }, // fourth line
+				{ row5_1, row5_2, row5_3, row5_4 }, // fifth line
+				{ row6_1, row6_2, row6_3, row6_4 }, // sixth line
+				{ row7_1, row7_2, row7_3, row7_4 }, // seventh line
+				{ row8_1, row8_2, row8_3, row8_4 }, // eighth line
+				{ row9_1, row9_2, row9_3, row9_4 } // ninth line
+		};
 
 		Input1 = new JButton("");
 		Input1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (isset1) {
-					Input1.setBackground(null);
-					current[0] = null;
+					current[0].setBackground(null);
 					isset1 = false;
 				}
 			}
@@ -380,8 +357,7 @@ public class MastermindGUI extends JFrame {
 		Input2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (isset2) {
-					Input2.setBackground(null);
-					current[1] = null;
+					current[1].setBackground(null);
 					isset2 = false;
 				}
 			}
@@ -393,8 +369,7 @@ public class MastermindGUI extends JFrame {
 		Input3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (isset3) {
-					Input3.setBackground(null);
-					current[2] = null;
+					current[2].setBackground(null);
 					isset3 = false;
 				}
 			}
@@ -406,14 +381,15 @@ public class MastermindGUI extends JFrame {
 		Input4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (isset4) {
-					Input4.setBackground(null);
-					current[3] = null;
+					current[3].setBackground(null);
 					isset4 = false;
 				}
 			}
 		});
 		Input4.setBounds(290, 570, 40, 40);
 		contentPane.add(Input4);
+
+		current = new JButton[] { Input1, Input2, Input3, Input4 };
 
 		Solution1 = new JButton("");
 		Solution1.setBounds(80, 20, 40, 40);
@@ -655,42 +631,17 @@ public class MastermindGUI extends JFrame {
 		pin9_4.setBounds(440, 515, 10, 40);
 		contentPane.add(pin9_4);
 
-		pins[0][0] = pin1_1;
-		pins[0][1] = pin1_2;
-		pins[0][2] = pin1_3;
-		pins[0][3] = pin1_4;
-		pins[1][0] = pin2_1;
-		pins[1][1] = pin2_2;
-		pins[1][2] = pin2_3;
-		pins[1][3] = pin2_4;
-		pins[2][0] = pin3_1;
-		pins[2][1] = pin3_2;
-		pins[2][2] = pin3_3;
-		pins[2][3] = pin3_4;
-		pins[3][0] = pin4_1;
-		pins[3][1] = pin4_2;
-		pins[3][2] = pin4_3;
-		pins[3][3] = pin4_4;
-		pins[4][0] = pin5_1;
-		pins[4][1] = pin5_2;
-		pins[4][2] = pin5_3;
-		pins[4][3] = pin5_4;
-		pins[5][0] = pin6_1;
-		pins[5][1] = pin6_2;
-		pins[5][2] = pin6_3;
-		pins[5][3] = pin6_4;
-		pins[6][0] = pin7_1;
-		pins[6][1] = pin7_2;
-		pins[6][2] = pin7_3;
-		pins[6][3] = pin7_4;
-		pins[7][0] = pin8_1;
-		pins[7][1] = pin8_2;
-		pins[7][2] = pin8_3;
-		pins[7][3] = pin8_4;
-		pins[8][0] = pin9_1;
-		pins[8][1] = pin9_2;
-		pins[8][2] = pin9_3;
-		pins[8][3] = pin9_4;
+		pins = new JPanel[][] { // begin
+				{ pin1_1, pin1_2, pin1_3, pin1_4 }, // first line
+				{ pin2_1, pin2_2, pin2_3, pin2_4 }, // second line
+				{ pin3_1, pin3_2, pin3_3, pin3_4 }, // third line
+				{ pin4_1, pin4_2, pin4_3, pin4_4 }, // fourth line
+				{ pin5_1, pin5_2, pin5_3, pin5_4 }, // fifth line
+				{ pin6_1, pin6_2, pin6_3, pin6_4 }, // sixth line
+				{ pin7_1, pin7_2, pin7_3, pin7_4 }, // seventh line
+				{ pin8_1, pin8_2, pin8_3, pin8_4 }, // eighth line
+				{ pin9_1, pin9_2, pin9_3, pin9_4 } // ninth line
+		};
 
 		setSoluBtn = new JButton("Set Solution");
 		setSoluBtn.addActionListener(new ActionListener() {
@@ -736,16 +687,7 @@ public class MastermindGUI extends JFrame {
 		playCompBtn = new JButton("Play against Computer");
 		playCompBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				for (int i = 0; i < 4; ++i) {
-					current[i] = colours[(int) (Math.random() * 8)];
-					for (int j = 0; j < i; ++j) {
-						if (current[i] == current[j]) {
-							i--;
-							break;
-						}
-					}
-				}
-				playCompBtn.setVisible(false);
+				chooseRandom();
 				start();
 			}
 		});
@@ -754,47 +696,35 @@ public class MastermindGUI extends JFrame {
 	}
 
 	private void setColour(Color c) {
-		for (Color clr : current) {
-			if (clr == c) {
+		for (JButton btn : current) {
+			if (btn.getBackground() == c) {
 				return;
 			}
 		}
 		if (!isset1) {
-			Input1.setBackground(c);
-			current[0] = c;
+			current[0].setBackground(c);
 			isset1 = true;
 		} else if (!isset2) {
-			Input2.setBackground(c);
-			current[1] = c;
+			current[1].setBackground(c);
 			isset2 = true;
 		} else if (!isset3) {
-			Input3.setBackground(c);
-			current[2] = c;
+			current[2].setBackground(c);
 			isset3 = true;
 		} else if (!isset4) {
-			Input4.setBackground(c);
-			current[3] = c;
+			current[3].setBackground(c);
 			isset4 = true;
 		}
 	}
 
-	private void reset(JButton button) {
-		button.setBackground(null);
-	}
-
 	private void resetAll() {
-		reset(Input1);
-		reset(Input2);
-		reset(Input3);
-		reset(Input4);
 		isset1 = false;
 		isset2 = false;
 		isset3 = false;
 		isset4 = false;
-		current[0] = null;
-		current[1] = null;
-		current[2] = null;
-		current[3] = null;
+		current[0].setBackground(null);
+		current[1].setBackground(null);
+		current[2].setBackground(null);
+		current[3].setBackground(null);
 		issetpin1 = false;
 		issetpin2 = false;
 		issetpin3 = false;
@@ -802,68 +732,46 @@ public class MastermindGUI extends JFrame {
 	}
 
 	private void setStart() {
-		Input1.setBackground(null);
-		Input2.setBackground(null);
-		Input3.setBackground(null);
-		Input4.setBackground(null);
-		isset1 = false;
-		isset2 = false;
-		isset3 = false;
-		isset4 = false;
+		resetAll();
 		Solution1.setBackground(null);
 		Solution2.setBackground(null);
 		Solution3.setBackground(null);
 		Solution4.setBackground(null);
+		for (int i = 0; i < 4; ++i) {
+			solution[i] = null;
+		}
 		for (int i = 0; i < 9; ++i) {
 			for (int j = 0; j < 4; ++j) {
 				pins[i][j].setBackground(null);
+				pins[i][j].setVisible(true);
 				panels[i][j].setBackground(null);
+				panels[i][j].setVisible(true);
 			}
 		}
-		issetpin1 = false;
-		issetpin2 = false;
-		issetpin3 = false;
-		issetpin4 = false;
 		EndOfGameLbl.setText("");
 		EndOfGameLbl.setVisible(false);
-		for (int i = 0; i < 4; ++i) {
-			current[i] = null;
-			solution[i] = null;
-		}
 		playAgainBtn.setVisible(false);
 		GuessBtn.setVisible(false);
 		setSoluBtn.setVisible(true);
 		playCompBtn.setVisible(true);
 		numGuesses = 1;
-		row4_1.setVisible(true);
-		row4_2.setVisible(true);
-		row4_3.setVisible(true);
-		row4_4.setVisible(true);
-		pin4_1.setVisible(true);
-		pin4_2.setVisible(true);
-		pin4_3.setVisible(true);
-		pin4_4.setVisible(true);
-	}
-
-	private void displayCurrent() {
-		for (int i = 0; i < 4; ++i) {
-			panels[numGuesses - 1][i].setBackground(current[i]);
-		}
 	}
 
 	private void guess() {
 		if (isValidInput()) {
 			if (evaluateGuess()) {
-				Solution1.setBackground(current[0]);
-				Solution2.setBackground(current[1]);
-				Solution3.setBackground(current[2]);
-				Solution4.setBackground(current[3]);
+				Solution1.setBackground(current[0].getBackground());
+				Solution2.setBackground(current[1].getBackground());
+				Solution3.setBackground(current[2].getBackground());
+				Solution4.setBackground(current[3].getBackground());
 				end();
 				String s = String.format("Congratulations you win after %d guesses!", numGuesses);
 				EndOfGameLbl.setText(s);
 				playAgainBtn.setVisible(true);
 			} else {
-				displayCurrent();
+				for (int i = 0; i < 4; ++i) {
+					panels[numGuesses - 1][i].setBackground(current[i].getBackground());
+				}
 				resetAll();
 				numGuesses++;
 				if (numGuesses == 10) {
@@ -889,8 +797,9 @@ public class MastermindGUI extends JFrame {
 	private void start() {
 		if (isValidInput()) {
 			for (int i = 0; i < 4; ++i) {
-				solution[i] = current[i];
+				solution[i] = current[i].getBackground();
 			}
+			playCompBtn.setVisible(false);
 			setSoluBtn.setVisible(false);
 			GuessBtn.setVisible(true);
 			Solution1.setBackground(Color.LIGHT_GRAY);
@@ -902,13 +811,13 @@ public class MastermindGUI extends JFrame {
 	}
 
 	private boolean evaluateGuess() {
-		if (areSame(current)) {
+		if (isCorrect()) {
 			return true;
 		}
 		int config = (int) (Math.random() * 24);
 		for (int m = 0; m < current.length; ++m) {
 			for (int n = 0; n < solution.length; ++n) {
-				if (current[eval[config][m]] == solution[n]) {
+				if (current[eval[config][m]].getBackground() == solution[n]) {
 					if (eval[config][m] == n) {
 						placePin(colours[7]);
 					} else {
@@ -920,9 +829,9 @@ public class MastermindGUI extends JFrame {
 		return false;
 	}
 
-	private boolean areSame(Color[] guess) {
+	private boolean isCorrect() {
 		for (int i = 0; i < 4; ++i) {
-			if (!(solution[i] == guess[i])) {
+			if (!(solution[i] == current[i].getBackground())) {
 				return false;
 			}
 		}
@@ -947,11 +856,23 @@ public class MastermindGUI extends JFrame {
 
 	private boolean isValidInput() {
 		for (int i = 0; i < 4; ++i) {
-			if (current[i] == null) {
+			if (current[i].getBackground().equals(new Color(238, 238, 238))) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	private void chooseRandom() {
+		for (int i = 0; i < 4; ++i) {
+			setColour(colours[(int) (Math.random() * 8)]);
+			for (int j = 0; j < i; ++j) {
+				if (current[i].getBackground() == current[j].getBackground()) {
+					i--;
+					break;
+				}
+			}
+		}
 	}
 
 }
