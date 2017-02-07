@@ -165,7 +165,6 @@ public class MastermindGUI extends JFrame {
 				try {
 					MastermindGUI frame = new MastermindGUI();
 					frame.setVisible(true);
-					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -177,6 +176,11 @@ public class MastermindGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MastermindGUI() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setTitle("Mastermind");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 50, 500, 800);
