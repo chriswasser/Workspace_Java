@@ -691,6 +691,7 @@ public class MastermindGUI extends JFrame {
 		playCompBtn = new JButton("Play against Computer");
 		playCompBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				resetAll();
 				chooseRandom();
 				start();
 			}
@@ -867,14 +868,18 @@ public class MastermindGUI extends JFrame {
 	}
 
 	private void chooseRandom() {
+		int[] num = new int[] {-1, -1, -1, -1};
 		for (int i = 0; i < 4; ++i) {
-			setColour(colours[(int) (Math.random() * 8)]);
-			for (int j = 0; j < i; ++j) {
-				if (current[i].getBackground() == current[j].getBackground()) {
-					i--;
+			num[i] = (int) (Math.random() * 8);
+			for(int j = 0; j < i; ++j) {
+				if(num[i] == num[j]) {
+					--i;
 					break;
 				}
 			}
+		}
+		for(int i : num) {
+			setColour(colours[i]);
 		}
 	}
 
