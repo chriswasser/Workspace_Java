@@ -30,4 +30,3 @@
 | `Hausaufgabe12`  | Read in text coded with Huffman coding and output plain text                   |
 | `Prime`          | Find all primes to a given number                                              |
 | `TrapezIntegral` | Perform a numerical integration with the trapezoid rule                        |
-
